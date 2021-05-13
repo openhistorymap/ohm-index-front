@@ -1,0 +1,16 @@
+<div class="content">
+<h1>OHM Data Index</h1>
+
+<table *ngIf="out">
+    <tr>
+        <th class="years"></th><th class="cols" *ngFor="let t of topics">            
+            <i class="fas fa-2x fa-{{iconFor(t)}}" title="{{t}}"></i>
+        </th>
+    </tr>
+    <tr *ngFor="let y of indices.years">
+        <th>{{y[0]}} - {{y[1]}}</th>
+        <td *ngFor="let t of topics">
+            <a href="/sources;ohm:from_time={{y[0]}};ohm:to_time={{y[1]}};ohm:topic={{t}}"><ohm-areadisplay [reference]="getReference(t)" [found]="getFound(y,t)"></ohm-areadisplay></a></td>
+    </tr>
+</table>
+</div>

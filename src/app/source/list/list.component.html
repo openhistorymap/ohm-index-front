@@ -1,0 +1,73 @@
+<mat-accordion>
+  
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Filters
+        </mat-panel-title>
+        <mat-panel-description> 
+          No Filter set
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{filter|json}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <table mat-table [dataSource]="dataSource" >
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> {{element.data.itemType}} </td>
+    </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element"> {{element.data.title}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef> Website </th>
+        <td mat-cell *matCellDef="let element"> <a _target="blank" [href]="element.data.url">Open</a> </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="doi">
+        <th mat-header-cell *matHeaderCellDef> URL </th>
+        <td mat-cell *matCellDef="let element"> <a _target="blank" [href]="element.data.parentItem.data.url">Open Link</a> </td>
+      </ng-container>
+    
+        <ng-container matColumnDef="authors">
+          <th mat-header-cell *matHeaderCellDef> Authors </th>
+          <td mat-cell *matCellDef="let element"> {{element.meta.creatorSummary}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="format">
+          <th mat-header-cell *matHeaderCellDef> Format </th>
+          <td mat-cell *matCellDef="let element"> {{element.format}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Timeframe </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.tags['ohm:from_time']}} - {{element.data.tags['ohm:to_time']}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="kind">
+          <th mat-header-cell *matHeaderCellDef> Kind </th>
+          <td mat-cell *matCellDef="let element"> 
+            <i class="fas fa-fw fa-2x fa-{{iconFor(element.data.tags['ohm:topic'])}} " title="{{element.data.tags['ohm:topic']}}"></i> 
+            <i class="fas fa-fw fa-2x fa-{{iconFor(element.data.tags['ohm:topic:topic'])}} " title="{{element.data.tags['ohm:topic:topic']}}"></i> 
+            </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="place">
+          <th mat-header-cell *matHeaderCellDef> Place </th>
+          <td mat-cell *matCellDef="let element"> {{element.data.tags['ohm:area']}} </td>
+        </ng-container>
+        <ng-container matColumnDef="datasets">
+          <th mat-header-cell *matHeaderCellDef> Datasets </th>
+          <td mat-cell *matCellDef="let element"> <a href="/datasets;for={{element.key}}">{{element.datasets}}</a></td>
+        </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  

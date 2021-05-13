@@ -1,0 +1,27 @@
+.spacer {
+    flex: 1 1 100px;
+}
+
+.title{
+    color:white;
+    text-decoration: none;
+}
+
+.bar{
+    position:fixed;
+    z-index: 1000000;
+}
+
+.footer{
+    width: 100vw;
+    position: fixed;
+    bottom:0;
+    background:white;
+    border-top: 1px solid black;
+    text-align: center;
+}
+
+.content{
+    padding-top: 64px;
+    padding-bottom:25px;
+}

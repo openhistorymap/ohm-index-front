@@ -1,0 +1,7 @@
+[
+    {"name": "license", "label": "License", "content": "string"},
+    {"name": "url", "label": "Address", "content": "url"},
+    {"name": "doi", "label": "DOI", "content": "url"},
+    {"name": "authors", "label": "Authors", "content": "string"},
+    {"name": "format", "label": "Format", "content": "string"}
+]

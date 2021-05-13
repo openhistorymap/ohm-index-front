@@ -1,0 +1,13 @@
+{
+  "dimensions": [
+      "timetags", 
+      "culturetags", 
+      "sourcetypes", 
+      "datasettypes"
+    ],
+  "elements": [
+      "sourcees",
+      "datasets"
+    ],
+  "index": ""
+}

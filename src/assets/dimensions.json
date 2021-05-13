@@ -1,0 +1,17 @@
+[
+    {"id": "1", "dimension": "kind", "name": "Geographic"},
+    {"id": "2", "dimension": "kind", "name": "Index"},
+    {"id": "3", "dimension": "kind", "name": "Reconstruction"},
+    {"id": "4", "dimension": "kind", "name": "Time Series"},
+
+    
+    {"id": "5", "dimension":"place", "name": "Europe"},
+    {"id": "6", "dimension":"place", "name": "Asia"},
+    {"id": "7", "dimension":"place", "name": "Africa"},
+    {"id": "8", "dimension":"place", "name": "N. America"},
+    {"id": "9", "dimension":"place", "name": "S. America"},
+    {"id": "10", "dimension":"place", "name": "Australia"},
+
+    
+    {"id": "11", "dimension": "time", "name":"XVIII Century"}
+]

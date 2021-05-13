@@ -1,0 +1,19 @@
+.c {
+    height: 28px;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+}
+
+.bar{
+    flex: 1 1 1px;
+    height: 28px;
+
+    &.yes{
+        background-color: rgb(107, 186, 107);
+    }
+    &.no {
+        background-color: rgb(255, 204, 204);
+    }
+}
+
