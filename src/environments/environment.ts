@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://51.15.160.236:9033'
+  baseUrl: 'https://api.index.openhistorymap.org'
 };
 
 /*
