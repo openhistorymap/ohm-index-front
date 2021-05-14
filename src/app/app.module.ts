@@ -20,6 +20,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CustomToolTipComponent } from './areadisplay/custom-tool-tip.component';
 
 import {MatInputModule} from '@angular/material/input';
+import { AddmodalComponent } from './addmodal/addmodal.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import {MatInputModule} from '@angular/material/input';
     AreadisplayComponent,
     AreadetailComponent,
     CustomToolTipComponent,
+    AddmodalComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    OverlayModule
+    OverlayModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
