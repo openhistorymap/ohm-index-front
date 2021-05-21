@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, sample } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, sample, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 
@@ -68,6 +69,8 @@ export class OhmIndexService {
 
   }
 
+  indices;
+
   getConf(){
     return this.http.get('assets/conf.json');
   }
@@ -81,19 +84,36 @@ export class OhmIndexService {
   }
 
   getIndices(){
-    return this.http.get(`${this.baseUrl}/indices`);
+    if (this.indices){
+      return of(this.indices);
+    } else { 
+      return this.http.get(`${this.baseUrl}/indices`).pipe(tap(x => {this.indices = x;}));
+    }
   }
 
-  getIndex() {
-    return this.http.get(`${this.baseUrl}/index`);
+  getIndex(spaceFilter) {
+    if (spaceFilter){
+      return this.http.get(`${this.baseUrl}/index?ohm:area__in=`+spaceFilter.join('|'));
+    } else {
+      return this.http.get(`${this.baseUrl}/index`);
+    }
   }
 
   getDatasets(filter?: any){
+    console.log(filter);
     return this.http.get(`${this.baseUrl}/datasets`, filter);
   }
 
   getSources(filter?: any){
     return this.http.get(`${this.baseUrl}/sources`, filter);
+  }
+  
+  getDataset(id){
+    return this.http.get(`${this.baseUrl}/datasets/`+id);
+  }
+
+  getSource(id){
+    return this.http.get(`${this.baseUrl}/sources/`+id);
   }
 
   addDataset(dataset: any){

@@ -7,6 +7,8 @@ import { SourceRoutingModule } from './source-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { DatasetModule } from '../dataset/dataset.module';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -18,6 +20,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     SourceRoutingModule,
     MatToolbarModule,
     MatExpansionModule,
+    DatasetModule,
+    MatChipsModule,
   ]
 })
 export class SourceModule { }

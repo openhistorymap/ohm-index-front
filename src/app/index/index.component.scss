@@ -6,6 +6,7 @@
 }
 
 table {
+    margin-top: 20px;
 }
 
 td{
@@ -21,4 +22,17 @@ td{
 
 .cols {
     width:70px;
+}
+
+a{
+    color:black;
+}
+
+
+.actions{
+    display: flex;
+    flex-direction: row;
+}
+.spacer{
+    flex: 1 1 10px;
 }

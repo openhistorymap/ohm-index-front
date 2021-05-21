@@ -22,6 +22,14 @@ import { CustomToolTipComponent } from './areadisplay/custom-tool-tip.component'
 import {MatInputModule} from '@angular/material/input';
 import { AddmodalComponent } from './addmodal/addmodal.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import { TreelabelPipe } from './index/treelabel.pipe';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -34,6 +42,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     AreadetailComponent,
     CustomToolTipComponent,
     AddmodalComponent,
+    TreelabelPipe,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,15 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatInputModule,
     OverlayModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatSelectModule,
+    CdkTreeModule,
+    MatTreeModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    MatChipsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

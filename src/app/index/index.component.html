@@ -1,10 +1,53 @@
 <div class="content">
 <h1>OHM Data Index</h1>
 
+<mat-accordion class="filter" multi *ngIf="indices">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Area Filter
+        </mat-panel-title>
+        <mat-panel-description>
+        <mat-chip-list >
+          <mat-chip *ngFor="let p of selected">{{p.item|treelabel:indices.areas}}</mat-chip>
+        </mat-chip-list>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <div style="width: 100%">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              <mat-checkbox class="checklist-leaf-node"
+                            [checked]="checklistSelection.isSelected(node)"
+                            (change)="todoLeafItemSelectionToggle(node)">{{node.item|treelabel:indices.areas}}</mat-checkbox>
+            </mat-tree-node>
+         
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.item">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <mat-checkbox [checked]="descendantsAllSelected(node)"
+                            [indeterminate]="descendantsPartiallySelected(node)"
+                            (change)="todoItemSelectionToggle(node)">{{node.item|treelabel:indices.areas}}</mat-checkbox>
+            </mat-tree-node>
+          </mat-tree>
+      </div>
+      <div class="actions">
+          <span class="spacer"></span><button (click)="applySpaceFilter()" mat-button mat-raised-button color="primary">Apply</button>
+      </div>
+  
+  
+    </mat-expansion-panel>
+</mat-accordion>
+
 <table *ngIf="out">
     <tr>
         <th class="years"></th><th class="cols" *ngFor="let t of topics">            
-            <i class="fas fa-2x fa-{{iconFor(t)}}" title="{{t}}"></i>
+            <a href="/sources;ohm:topic={{t}}"><i class="fas fa-2x fa-{{iconFor(t)}}" title="{{t}}"></i></a>
         </th>
     </tr>
     <tr *ngFor="let y of indices.years">

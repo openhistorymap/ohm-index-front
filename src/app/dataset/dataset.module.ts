@@ -19,6 +19,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DatasetRoutingModule,
     MatToolbarModule,
     MatExpansionModule,
+  ],
+  exports:[
+    ListComponent
   ]
 })
 export class DatasetModule { }

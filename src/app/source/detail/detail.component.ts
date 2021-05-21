@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OhmIndexService } from 'src/app/ohm-index.service';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  source;
+  key;
+
+  constructor(
+    private ar: ActivatedRoute,
+    private ohm: OhmIndexService
+  ) { }
 
   ngOnInit(): void {
+    this.ar.params.subscribe(p => {
+      this.key = p.id;
+      this.ohm.getSource(this.key).subscribe(d => {
+        this.source = d;
+      })
+    });
   }
 
 }

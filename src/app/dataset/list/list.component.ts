@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { OhmIndexService } from '../../ohm-index.service';
 
@@ -13,17 +13,26 @@ export class ListComponent implements OnInit {
   dataSource = [];
   panelOpenState = false;
 
+  @Input() source: string;
+
   constructor(
     private ohm: OhmIndexService,
     private ar: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.ar.paramMap.subscribe(pm => {
-      this.ohm.getDatasets(pm).subscribe((data: any) =>{
+    if(this.source){
+      console.log('getting source');
+      this.ohm.getDatasets({params: {for: this.source}}).subscribe((data: any) =>{
         this.dataSource = data;
       })
-    })
+    } else {
+      this.ar.paramMap.subscribe(pm => {
+        this.ohm.getDatasets(pm).subscribe((data: any) =>{
+          this.dataSource = data;
+        })
+      })
+    }
     
   }
 
