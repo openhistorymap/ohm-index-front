@@ -149,10 +149,10 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.ohm.getIndices().subscribe(indices => {
       this.indices = indices;
-      this._database.initialize(this.indices.trees)
-      this.ohm.getIndex(this.spaceFilter).subscribe((data: any) => {
+      this.ohm.getIndex().subscribe((data: any) => {
         this.out = data;
       });
+      this._database.initialize(this.indices.trees);
     })
   }
 

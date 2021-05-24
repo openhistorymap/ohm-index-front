@@ -9,9 +9,9 @@
 
 <h3>Tags</h3>
 
-<mat-chip-list>
+<mat-chip-list *ngIf="indices">
     <mat-chip *ngFor="let c of source.data.tags | keyvalue: keepOriginalOrder ">
-        {{c.key}}: {{c.value}}
+        {{c.key}}: {{c.value|treelabel:indices.areas}}
     </mat-chip>
 </mat-chip-list>
 

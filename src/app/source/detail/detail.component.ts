@@ -12,6 +12,8 @@ export class DetailComponent implements OnInit {
   source;
   key;
 
+  indices;
+
   constructor(
     private ar: ActivatedRoute,
     private ohm: OhmIndexService
@@ -20,6 +22,9 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.ar.params.subscribe(p => {
       this.key = p.id;
+      this.ohm.getIndices().subscribe(data => {
+        this.indices = data;
+      })
       this.ohm.getSource(this.key).subscribe(d => {
         this.source = d;
       })

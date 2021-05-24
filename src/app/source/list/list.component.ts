@@ -12,6 +12,8 @@ export class ListComponent implements OnInit {
   dataSource = [];
   panelOpenState = false;
 
+  indices;
+
   filter;
 
   constructor(
@@ -22,6 +24,9 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.ar.paramMap.subscribe(pm => {
       this.filter = pm;
+      this.ohm.getIndices().subscribe(data => {
+        this.indices = data;
+      })
       this.ohm.getSources(pm).subscribe((data: any) =>{
         this.dataSource = data;
       })

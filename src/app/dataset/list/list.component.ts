@@ -13,14 +13,19 @@ export class ListComponent implements OnInit {
   dataSource = [];
   panelOpenState = false;
 
+  indices
+
   @Input() source: string;
 
   constructor(
-    private ohm: OhmIndexService,
+    public ohm: OhmIndexService,
     private ar: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.ohm.getIndices().subscribe(data => {
+      this.indices = data;
+    })
     if(this.source){
       console.log('getting source');
       this.ohm.getDatasets({params: {for: this.source}}).subscribe((data: any) =>{
@@ -32,9 +37,10 @@ export class ListComponent implements OnInit {
           this.dataSource = data;
         })
       })
-    }
-    
+    } 
   }
+
+  
 
   iconFor(t) {
     return this.ohm.iconFor(t);

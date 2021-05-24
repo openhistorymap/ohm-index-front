@@ -24,7 +24,7 @@ import { AddmodalComponent } from './addmodal/addmodal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
-import { TreelabelPipe } from './index/treelabel.pipe';
+import { TreelabelPipe } from './treelabel.pipe';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatTooltipModule} from '@angular/material/tooltip';

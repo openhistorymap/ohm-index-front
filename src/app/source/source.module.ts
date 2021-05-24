@@ -9,11 +9,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DatasetModule } from '../dataset/dataset.module';
 import {MatChipsModule} from '@angular/material/chips';
+import { TreelabelPipe } from './treelabel.pipe';
 
 
 
 @NgModule({
-  declarations: [ListComponent, DetailComponent, AddComponent],
+  declarations: [ListComponent, DetailComponent, AddComponent, TreelabelPipe],
   imports: [
     CommonModule,
     MatTableModule,

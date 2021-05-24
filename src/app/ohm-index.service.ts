@@ -91,7 +91,7 @@ export class OhmIndexService {
     }
   }
 
-  getIndex(spaceFilter) {
+  getIndex(spaceFilter?) {
     if (spaceFilter){
       return this.http.get(`${this.baseUrl}/index?ohm:area__in=`+spaceFilter.join('|'));
     } else {
