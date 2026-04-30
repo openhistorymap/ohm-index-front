@@ -1,19 +1,24 @@
+:host { display: block; }
+
 .c {
-    height: 28px;
+    height: 22px;
     width: 100%;
     flex-direction: row;
     display: flex;
+    gap: 1px;
+    border: 1px solid var(--ohm-rule);
+    background: var(--ohm-bg);
 }
 
-.bar{
+.bar {
     flex: 1 1 1px;
-    height: 28px;
+    height: 100%;
+    transition: background-color var(--duration-quick) var(--ease-out);
 
-    &.yes{
-        background-color: rgb(107, 186, 107);
+    &.yes {
+        background-color: var(--ohm-accent);
     }
     &.no {
-        background-color: rgb(255, 204, 204);
+        background-color: color-mix(in oklch, var(--ohm-fg-3) 18%, transparent);
     }
 }
-

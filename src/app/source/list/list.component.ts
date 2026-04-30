@@ -1,8 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MatTableModule } from '@angular/material/table';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 import { OhmIndexService } from '../../ohm-index.service';
 import { TreelabelPipe } from '../../shared/treelabel.pipe';
@@ -10,29 +8,29 @@ import { TreelabelPipe } from '../../shared/treelabel.pipe';
 @Component({
   selector: 'app-source-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatTableModule, MatExpansionModule, TreelabelPipe],
+  imports: [CommonModule, RouterLink, TreelabelPipe],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'authors', 'url', 'time', 'kind', 'place', 'datasets'];
-  dataSource: any[] = [];
-  panelOpenState = false;
-  indices: any;
-  filter: any;
+  readonly entries = signal<any[]>([]);
+  readonly indices = signal<any>(null);
+  readonly filterPairs = signal<{ key: string; value: string }[]>([]);
+  readonly hasFilter = computed(() => this.filterPairs().length > 0);
 
   private ohm = inject(OhmIndexService);
   private ar = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.ar.paramMap.subscribe(pm => {
-      this.filter = pm;
-      this.ohm.getIndices().subscribe(data => {
-        this.indices = data;
+      const pairs: { key: string; value: string }[] = [];
+      pm.keys.forEach(k => {
+        const v = pm.get(k);
+        if (v != null) pairs.push({ key: k, value: v });
       });
-      this.ohm.getSources(pm).subscribe((data: any) => {
-        this.dataSource = data;
-      });
+      this.filterPairs.set(pairs);
+      this.ohm.getIndices().subscribe(data => this.indices.set(data));
+      this.ohm.getSources(pm).subscribe((data: any) => this.entries.set(data));
     });
   }
 

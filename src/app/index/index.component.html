@@ -1,71 +1,116 @@
-<div class="content">
-<h1>OHM Data Index</h1>
+<article class="indexpage">
 
-@if (indices) {
-<mat-accordion class="filter">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Area Filter
-        </mat-panel-title>
-        <mat-panel-description>
-        <mat-chip-set>
-          @for (p of selected; track p.item) {
-            <mat-chip>{{p.item|treelabel:indices.areas}}</mat-chip>
-          }
-        </mat-chip-set>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <header class="indexpage-head">
+    <p class="ohm-eyebrow">A finder by region, period, and topic</p>
+    <h1 class="indexpage-title">The Index</h1>
+    <p class="indexpage-lede">
+      Each cell counts the sources that touch a given topic during a given window of
+      time. Click a count to read the sources behind it. Narrow the rows by region with
+      the area filter below.
+    </p>
+  </header>
 
-      <div style="width: 100%">
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  @if (indices) {
+    <section class="filter" aria-labelledby="filter-heading">
+      <details class="filter-panel">
+        <summary class="filter-summary">
+          <span class="filter-summary-text">
+            <span class="filter-summary-label" id="filter-heading">Area filter</span>
+            @if (selected.length === 0) {
+              <span class="filter-summary-empty">Showing all regions</span>
+            } @else {
+              <span class="filter-summary-chips">
+                @for (p of selected; track p.item) {
+                  <span class="filter-chip">{{ p.item | treelabel:indices.areas }}</span>
+                }
+              </span>
+            }
+          </span>
+          <span class="filter-summary-glyph" aria-hidden="true">+</span>
+        </summary>
+
+        <div class="filter-body">
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="ohm-tree">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-              <button mat-icon-button disabled></button>
-              <mat-checkbox class="checklist-leaf-node"
-                            [checked]="checklistSelection.isSelected(node)"
-                            (change)="todoLeafItemSelectionToggle(node)">{{node.item|treelabel:indices.areas}}</mat-checkbox>
+              <span class="ohm-tree-spacer" aria-hidden="true"></span>
+              <mat-checkbox
+                class="ohm-tree-leaf"
+                [checked]="checklistSelection.isSelected(node)"
+                (change)="todoLeafItemSelectionToggle(node)">
+                {{ node.item | treelabel:indices.areas }}
+              </mat-checkbox>
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-              <button mat-icon-button matTreeNodeToggle
-                      [attr.aria-label]="'Toggle ' + node.item">
+              <button
+                mat-icon-button
+                matTreeNodeToggle
+                class="ohm-tree-toggle"
+                [attr.aria-label]="(treeControl.isExpanded(node) ? 'Collapse ' : 'Expand ') + (node.item | treelabel:indices.areas)">
                 <mat-icon class="mat-icon-rtl-mirror">
-                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
                 </mat-icon>
               </button>
-              <mat-checkbox [checked]="descendantsAllSelected(node)"
-                            [indeterminate]="descendantsPartiallySelected(node)"
-                            (change)="todoItemSelectionToggle(node)">{{node.item|treelabel:indices.areas}}</mat-checkbox>
+              <mat-checkbox
+                [checked]="descendantsAllSelected(node)"
+                [indeterminate]="descendantsPartiallySelected(node)"
+                (change)="todoItemSelectionToggle(node)">
+                {{ node.item | treelabel:indices.areas }}
+              </mat-checkbox>
             </mat-tree-node>
           </mat-tree>
-      </div>
-      <div class="actions">
-          <span class="spacer"></span><button (click)="applySpaceFilter()" mat-button mat-raised-button color="primary">Apply</button>
-      </div>
-    </mat-expansion-panel>
-</mat-accordion>
-}
 
-@if (out) {
-<table>
-    <tr>
-        <th class="years"></th>
-        @for (t of topics; track t) {
-          <th class="cols">
-            <a href="/sources;ohm:topic={{t}}"><i class="fas fa-2x fa-{{iconFor(t)}}" title="{{t}}"></i></a>
-          </th>
-        }
-    </tr>
-    @for (y of indices.years; track y) {
-    <tr>
-        <th>{{y[0]}} - {{y[1]}}</th>
-        @for (t of topics; track t) {
-        <td>
-            <a href="/sources;ohm:from_time={{y[0]}};ohm:to_time={{y[1]}};ohm:topic={{t}}"><ohm-areadisplay [reference]="getReference(t)" [found]="getFound(y,t)"></ohm-areadisplay></a>
-        </td>
-        }
-    </tr>
-    }
-</table>
-}
-</div>
+          <div class="filter-actions">
+            <button type="button" class="btn btn-primary" (click)="applySpaceFilter()">
+              Apply filter
+            </button>
+          </div>
+        </div>
+      </details>
+    </section>
+  }
+
+  @if (out) {
+    <section class="matrix" aria-label="Sources by period and topic">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th class="matrix-period-head" scope="col">
+              <span class="ohm-eyebrow">Period</span>
+            </th>
+            @for (t of topics; track t) {
+              <th class="matrix-topic-head" scope="col">
+                <a [href]="'/sources;ohm:topic=' + t" [title]="t" class="matrix-topic-link">
+                  <i class="fas fa-{{ iconFor(t) }}" aria-hidden="true"></i>
+                  <span class="matrix-topic-label">{{ t }}</span>
+                </a>
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (y of indices.years; track y) {
+            <tr>
+              <th class="matrix-period" scope="row">
+                <span class="matrix-period-from">{{ y[0] }}</span>
+                <span class="matrix-period-sep" aria-hidden="true">—</span>
+                <span class="matrix-period-to">{{ y[1] }}</span>
+              </th>
+              @for (t of topics; track t) {
+                <td class="matrix-cell">
+                  <a
+                    [href]="'/sources;ohm:from_time=' + y[0] + ';ohm:to_time=' + y[1] + ';ohm:topic=' + t"
+                    class="matrix-cell-link"
+                    [attr.aria-label]="t + ' between ' + y[0] + ' and ' + y[1]">
+                    <ohm-areadisplay [reference]="getReference(t)" [found]="getFound(y, t)"></ohm-areadisplay>
+                  </a>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  }
+
+</article>

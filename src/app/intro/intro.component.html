@@ -1,22 +1,117 @@
-<div class="bg"><div class="bg_color">
-<div class="container">
-    <h1>Open History Map Data Index</h1>
-    <h3>Tracking the data about our past</h3>
-    <h4>A project by <a href="https://www.openhistorymap.org" target="_blank">Open History Map</a></h4>
-    <p>
-        Since the beginning of our project, the most complex operation was the search for datasets. 
-        Conversion, uniformation and normalization is complicated, but technology helps. The search for the 
-        right dataset is, on the other hand, very complicated and requires us to think like somebody we
-        often do not know. 
-    </p>
-    <p>This is the reason behind the OHM Data Index, switching the context to the amazing <a href="https://index.okfn.org" target="_blank">OKFN Open Data Index</a>.</p>
-    <div class="buttons">
-        <a mat-button mat-button-primary routerLink="/index"><i class="far fa-fw fa-2x fa-chart-bar"></i> Explore the index</a>
-        <a mat-button mat-button-primary routerLink="/sources"><i class="far fa-fw fa-2x fa-comment-alt"></i>Explore the sources</a>
-        <a mat-button mat-button-primary routerLink="/datasets"><i class="fas fa-fw fa-2x fa-table"></i>Explore the datasets</a>
-    </div>
-    <p>If you want us to add a dataset or a research to the collection use the "+" button on the top bar</p>
+<article class="intro">
 
-</div>
-</div>
-</div>
+  <section class="hero">
+    <p class="hero-eyebrow">A reading room of the past · est. <span class="numerals">2017</span></p>
+    <h1 class="hero-title">
+      A library of <em>where</em>, <em>when</em>, and <em>who</em>
+      <span class="hero-period">said it first.</span>
+    </h1>
+    <p class="hero-lede">
+      The <strong>Open History Map Data Index</strong> is a working catalog of the sources, datasets, and regions
+      that the Open History Map project draws on. It exists because finding a usable historical
+      dataset is harder than converting one — you have to know what to ask for, and in whose vocabulary.
+    </p>
+    <p class="hero-meta">
+      <a routerLink="/index" class="hero-doorway primary">Open the index</a>
+      <span class="hero-or">or browse</span>
+      <a routerLink="/sources" class="hero-doorway">sources</a><span aria-hidden="true">,</span>
+      <a routerLink="/datasets" class="hero-doorway">datasets</a><span aria-hidden="true">,</span>
+      <a routerLink="/methodology" class="hero-doorway">how it&rsquo;s made</a>.
+    </p>
+  </section>
+
+  <hr class="ohm-rule-strong">
+
+  <section class="passage">
+    <header class="passage-head">
+      <span class="passage-num">i.</span>
+      <h2 class="passage-title">Why this exists</h2>
+    </header>
+    <div class="passage-body">
+      <p class="dropcap">
+        Since the project began, the most consistently difficult operation has not been
+        conversion or normalization &mdash; those are tractable engineering problems &mdash; but
+        <em>search</em>. The right dataset for a question about, say, the parishes of
+        sixteenth-century Bologna lives under whatever vocabulary its compiler chose, often
+        a vocabulary the seeker does not share. The OHM Data Index is a small attempt at the
+        switchboard between the two.
+      </p>
+      <p>
+        It draws on the spirit of the
+        <a href="https://index.okfn.org" target="_blank" rel="noopener">OKFN Open Data Index</a>,
+        published yearly to track the openness of public data across countries, but turns
+        the same instrument toward sources for the past: who recorded a place, when, in
+        what tradition, with what evidence still standing.
+      </p>
+    </div>
+  </section>
+
+  <section class="doorways" aria-labelledby="doorways-heading">
+    <header class="doorways-head">
+      <span class="passage-num">ii.</span>
+      <h2 id="doorways-heading" class="passage-title">Three ways in</h2>
+    </header>
+
+    <ol class="doorway-list">
+      <li class="doorway">
+        <a routerLink="/index" class="doorway-link">
+          <span class="doorway-number">01</span>
+          <div class="doorway-text">
+            <h3 class="doorway-title">The index</h3>
+            <p class="doorway-blurb">
+              A tree of topics &mdash; cultures, places, types of source &mdash; that you can
+              walk the way a reader walks a finding aid. Filter by region, by century, by tag.
+            </p>
+          </div>
+          <span class="doorway-cta" aria-hidden="true">Read &rarr;</span>
+        </a>
+      </li>
+
+      <li class="doorway">
+        <a routerLink="/sources" class="doorway-link">
+          <span class="doorway-number">02</span>
+          <div class="doorway-text">
+            <h3 class="doorway-title">The sources</h3>
+            <p class="doorway-blurb">
+              Where the data comes from: cadasters, gazetteers, expedition logs, atlases,
+              chronicles. Each entry carries its provenance, its dates, and its lineage.
+            </p>
+          </div>
+          <span class="doorway-cta" aria-hidden="true">Read &rarr;</span>
+        </a>
+      </li>
+
+      <li class="doorway">
+        <a routerLink="/datasets" class="doorway-link">
+          <span class="doorway-number">03</span>
+          <div class="doorway-text">
+            <h3 class="doorway-title">The datasets</h3>
+            <p class="doorway-blurb">
+              Sources translated into geometry and time: vector datasets ready for the map,
+              with the original record one click away. Filter by topic, period, or extent.
+            </p>
+          </div>
+          <span class="doorway-cta" aria-hidden="true">Read &rarr;</span>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <hr class="ohm-rule">
+
+  <section class="passage contribute-passage">
+    <header class="passage-head">
+      <span class="passage-num">iii.</span>
+      <h2 class="passage-title">Add to the catalog</h2>
+    </header>
+    <div class="passage-body">
+      <p>
+        If you know of a source or dataset that belongs here, the
+        <a routerLink="/add">contribute page</a> is how to reach the editors. The catalog grows
+        slowly, in public, with each addition reviewed against the
+        <a routerLink="/methodology">methodology</a>.
+      </p>
+    </div>
+  </section>
+
+</article>

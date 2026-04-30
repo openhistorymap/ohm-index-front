@@ -1,28 +1,60 @@
 @if (source) {
-<div class="container">
-  <h1>{{source.data.title}}</h1>
+  <article class="record">
 
-  <div>
-    Authors:
-    @for (c of source.data.creators; track c) {
-      <span><i class="fas fa-fw fa-user"></i>{{c.name}} {{c.firstName}} {{c.lastName}}</span>
-    }
-  </div>
+    <header class="record-head">
+      <p class="ohm-eyebrow">
+        <a routerLink="/sources" class="record-back">&larr; Sources</a>
+        @if (source.data.itemType) {
+          <span class="record-type">· {{ source.data.itemType }}</span>
+        }
+      </p>
+      <h1 class="record-title">{{ source.data.title }}</h1>
 
-  <div>Link: <a href="{{source.data.url}}" target="_blank">{{source.data.url}}</a></div>
+      @if (source.data.creators?.length) {
+        <p class="record-byline">
+          @for (c of source.data.creators; track c; let last = $last) {
+            <span class="record-author">{{ c.firstName }} {{ c.lastName || c.name }}</span>@if (!last) {<span aria-hidden="true">, </span>}
+          }
+        </p>
+      }
+    </header>
 
-  <h3>Tags</h3>
+    <hr class="ohm-rule">
 
-  @if (indices) {
-  <mat-chip-set>
-    @for (c of source.data.tags | keyvalue: keepOriginalOrder; track c.key) {
-      <mat-chip>{{c.key}}: {{c.value|treelabel:indices.areas}}</mat-chip>
-    }
-  </mat-chip-set>
-  }
+    <section class="record-body">
 
-  <hr>
-  <h2>Datasets</h2>
-</div>
-<app-datasets [source]="key"></app-datasets>
+      @if (source.data.url) {
+        <p class="record-link">
+          <span class="ohm-eyebrow">Original</span>
+          <a [href]="source.data.url" target="_blank" rel="noopener">
+            {{ source.data.url }}
+            <span aria-hidden="true">&nearr;</span>
+          </a>
+        </p>
+      }
+
+      @if (indices && source.data.tags) {
+        <section class="record-tags" aria-labelledby="tags-heading">
+          <h2 id="tags-heading" class="record-section-title">Tags</h2>
+          <dl class="record-tag-list">
+            @for (c of source.data.tags | keyvalue: keepOriginalOrder; track c.key) {
+              <div class="record-tag">
+                <dt>{{ c.key }}</dt>
+                <dd>{{ c.value | treelabel:indices.areas }}</dd>
+              </div>
+            }
+          </dl>
+        </section>
+      }
+
+      <section class="record-datasets" aria-labelledby="datasets-heading">
+        <header class="record-datasets-head">
+          <h2 id="datasets-heading" class="record-section-title">Datasets derived from this source</h2>
+        </header>
+        <app-datasets [source]="key"></app-datasets>
+      </section>
+
+    </section>
+
+  </article>
 }

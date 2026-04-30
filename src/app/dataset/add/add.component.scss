@@ -1,0 +1,23 @@
+:host { display: block; }
+
+.redirect-stub {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.redirect-stub h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  margin: 0;
+}
+.redirect-stub p {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-prose);
+  color: var(--ohm-fg-2);
+  margin: 0;
+}

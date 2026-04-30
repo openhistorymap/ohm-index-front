@@ -1,27 +1,57 @@
-<mat-toolbar color="primary" class="bar">
-  <button mat-icon-button aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span><a class="title" routerLink="/">OHM Data Index</a></span>
-  <span class="spacer"></span>
-  <button mat-button aria-label="Example icon-button with share icon" routerLink="/index">
-    Index
-  </button>
-  <button mat-button aria-label="Example icon-button with share icon" routerLink="/sources">
-    Sources
-  </button>
-  <button mat-button aria-label="Example icon-button with share icon" routerLink="/datasets">
-    Datasets
-  </button>
-  <button mat-button aria-label="Example icon-button with share icon" routerLink="/methodology">
-    Methodology
-  </button>
-  
-  <button mat-icon-button aria-label="Example icon-button with share icon" routerLink="/add"> 
-    <mat-icon>add</mat-icon>
-  </button>
-</mat-toolbar>
-<div class="content">
-<router-outlet></router-outlet>
-</div>
-<div class="footer">Made with ❤ in Bologna by Open History Map </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a routerLink="/" class="lockup" aria-label="Open History Map Data Index — home">
+      <span class="lockup-mark" aria-hidden="true">OHM</span>
+      <span class="lockup-text">
+        <span class="lockup-title">The Data Index</span>
+        <span class="lockup-sub">Open History Map</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a routerLink="/index" routerLinkActive="is-active">Index</a>
+      <a routerLink="/sources" routerLinkActive="is-active">Sources</a>
+      <a routerLink="/datasets" routerLinkActive="is-active">Datasets</a>
+      <a routerLink="/methodology" routerLinkActive="is-active">Methodology</a>
+    </nav>
+
+    <div class="masthead-actions">
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="themeLabel() + '. Click to cycle.'"
+        [title]="themeLabel()"
+      >
+        <span class="theme-glyph" aria-hidden="true">{{ themeGlyph() }}</span>
+      </button>
+      <a routerLink="/add" class="contribute" aria-label="Contribute a source or dataset">
+        <span class="contribute-plus" aria-hidden="true">+</span>
+        <span class="contribute-label">Contribute</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="main">
+  <router-outlet />
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div class="colophon-brand">
+      <span class="colophon-mark">OHM</span>
+      <span class="colophon-line">The Open History Map Data Index</span>
+    </div>
+    <p class="colophon-meta">
+      Compiled in Bologna by the Open History Map collective.
+      <a href="https://www.openhistorymap.org" target="_blank" rel="noopener">openhistorymap.org</a>
+      &nbsp;·&nbsp;
+      <a routerLink="/methodology">Methodology</a>
+      &nbsp;·&nbsp;
+      <a href="https://api.index.openhistorymap.org" target="_blank" rel="noopener">API</a>
+    </p>
+  </div>
+</footer>

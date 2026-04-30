@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, KeyValuePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { MatChipsModule } from '@angular/material/chips';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { OhmIndexService } from '../../ohm-index.service';
 import { TreelabelPipe } from '../../shared/treelabel.pipe';
@@ -10,7 +9,7 @@ import { ListComponent as DatasetListComponent } from '../../dataset/list/list.c
 @Component({
   selector: 'app-source-detail',
   standalone: true,
-  imports: [CommonModule, KeyValuePipe, MatChipsModule, TreelabelPipe, DatasetListComponent],
+  imports: [CommonModule, RouterLink, KeyValuePipe, TreelabelPipe, DatasetListComponent],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })

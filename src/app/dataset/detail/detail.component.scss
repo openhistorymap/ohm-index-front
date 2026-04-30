@@ -1,0 +1,27 @@
+:host { display: block; }
+
+.placeholder {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.placeholder-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--display-2);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+
+.placeholder-lede {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-prose);
+  color: var(--ohm-fg-2);
+  margin: 0;
+}
