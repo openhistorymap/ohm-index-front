@@ -1,13 +1,13 @@
-<div class="c" cdkOverlayOrigin  #trigger="cdkOverlayOrigin">
-    <div *ngFor="let r of reference" class="bar" [ngClass]="getPresent(r)"> </div>
+<div class="c" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  @for (r of reference; track r) {
+    <div class="bar" [ngClass]="getPresent(r)"></div>
+  }
 </div>
 
 <ng-template
-
-cdkConnectedOverlay
-[cdkConnectedOverlayOrigin]="trigger"
-
-[cdkConnectedOverlayOpen]="isOpen"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
 >
-<ohm-areadetail [reference]="reference" [found]="found"></ohm-areadetail>
+  <ohm-areadetail [reference]="reference" [found]="found"></ohm-areadetail>
 </ng-template>

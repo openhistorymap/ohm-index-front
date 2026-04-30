@@ -1,22 +1,28 @@
-<div class="container" *ngIf="source">
-<h1>{{source.data.title}}</h1>
+@if (source) {
+<div class="container">
+  <h1>{{source.data.title}}</h1>
 
-<div>
-    Authors: <span *ngFor="let c of source.data.creators"><i class="fas fa-fw fa-user"></i>{{c.name}} {{c.firstName}} {{c.lastName}}</span>
+  <div>
+    Authors:
+    @for (c of source.data.creators; track c) {
+      <span><i class="fas fa-fw fa-user"></i>{{c.name}} {{c.firstName}} {{c.lastName}}</span>
+    }
+  </div>
+
+  <div>Link: <a href="{{source.data.url}}" target="_blank">{{source.data.url}}</a></div>
+
+  <h3>Tags</h3>
+
+  @if (indices) {
+  <mat-chip-set>
+    @for (c of source.data.tags | keyvalue: keepOriginalOrder; track c.key) {
+      <mat-chip>{{c.key}}: {{c.value|treelabel:indices.areas}}</mat-chip>
+    }
+  </mat-chip-set>
+  }
+
+  <hr>
+  <h2>Datasets</h2>
 </div>
-
-<div>Link: <a href="{{source.data.url}}" target="_blank">{{source.data.url}}</a></div>
-
-<h3>Tags</h3>
-
-<mat-chip-list *ngIf="indices">
-    <mat-chip *ngFor="let c of source.data.tags | keyvalue: keepOriginalOrder ">
-        {{c.key}}: {{c.value|treelabel:indices.areas}}
-    </mat-chip>
-</mat-chip-list>
-
-
-<hr>
-<h2>Datasets</h2>
-</div>
-<app-datasets *ngIf="source" [source]="key"></app-datasets>
+<app-datasets [source]="key"></app-datasets>
+}

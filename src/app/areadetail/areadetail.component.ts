@@ -1,28 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { OhmIndexService } from '../ohm-index.service';
 
 @Component({
   selector: 'ohm-areadetail',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './areadetail.component.html',
-  styleUrls: ['./areadetail.component.scss']
+  styleUrls: ['./areadetail.component.scss'],
 })
-export class AreadetailComponent implements OnInit {
-
+export class AreadetailComponent {
   @Input() reference: any;
-  @Input() found: String[];
+  @Input() found: string[] = [];
 
-  constructor(
-    private ohm:OhmIndexService
-  ) { }
+  private ohm = inject(OhmIndexService);
 
-  ngOnInit(): void {
+  getPresent(r: string) {
+    return this.found.indexOf(r) >= 0 ? 'yes' : 'no';
   }
 
-  getPresent(r){
-    return this.found.indexOf(r)>=0?'yes':'no';
-  }
-
-  iconFor(t) {
+  iconFor(t: string) {
     return this.ohm.iconFor(t);
   }
 }

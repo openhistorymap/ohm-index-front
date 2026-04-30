@@ -1,50 +1,35 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { of } from 'rxjs';
-import { map, sample, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
+@Injectable({ providedIn: 'root' })
+export class OhmIndexTimeTagService {}
 
-
-@Injectable({
-  providedIn: 'root'
-})
-export class OhmIndexTimeTagService { 
-  constructor(
-    private http:HttpClient,
-  ) {}
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class OhmIndexService {
   baseUrl = environment.baseUrl;
 
-  constructor(
-    private http: HttpClient,
-    private ohmdimtt: OhmIndexTimeTagService
-  ) { }
+  private http = inject(HttpClient);
+  private ohmdimtt = inject(OhmIndexTimeTagService);
 
-  
-  icons = {
+  icons: { [key: string]: string } = {
     agriculture: 'tractor',
-    economy:'piggy-bank',
-    entertainment:'theater-masks',
-    ephemeral:'drafting-compass',
-    geography:'globe-europe',
+    economy: 'piggy-bank',
+    entertainment: 'theater-masks',
+    ephemeral: 'drafting-compass',
+    geography: 'globe-europe',
     industry: 'industry',
     politics: 'landmark',
-    'infrastructure:roads':'horse',
-    'infrastructure:water':'ship',
-    'infrastructure:air':'plane',
-    'religion':'praying-hands',
+    'infrastructure:roads': 'horse',
+    'infrastructure:water': 'ship',
+    'infrastructure:air': 'plane',
+    religion: 'praying-hands',
     urban: 'city',
     climate: 'cloud',
-    war:'dove',
-
+    war: 'dove',
     physical: 'universal-access',
-
     location: 'map-marker-alt',
     structure: 'border-all',
     events: 'calendar-alt',
@@ -52,8 +37,7 @@ export class OhmIndexService {
     indexes: 'indent',
     model: 'kaaba',
     usage: 'sign-language',
-
-    csv:'file-csv',
+    csv: 'file-csv',
     shapefile: 'file-medical-alt',
     geojson: 'file-medical-alt',
     geotiff: 'passport',
@@ -62,70 +46,59 @@ export class OhmIndexService {
     jpeg: 'file-image',
     jpg: 'file-image',
     png: 'file-image',
-
     document: 'file-alt',
     map: '',
     book: '',
+  };
 
-  }
+  indices: any;
 
-  indices;
-
-  getConf(){
+  getConf() {
     return this.http.get('assets/conf.json');
   }
 
-  getDimensions(name){
-    return this.http.get(`${this.baseUrl}/dimensions`)
+  getDimensions(_name?: string) {
+    return this.http.get(`${this.baseUrl}/dimensions`);
   }
 
-  getTimeTags(){
+  getTimeTags() {
     return this.ohmdimtt;
   }
 
-  getIndices(){
-    if (this.indices){
+  getIndices() {
+    if (this.indices) {
       return of(this.indices);
-    } else { 
-      return this.http.get(`${this.baseUrl}/indices`).pipe(tap(x => {this.indices = x;}));
     }
+    return this.http.get(`${this.baseUrl}/indices`).pipe(tap(x => (this.indices = x)));
   }
 
-  getIndex(spaceFilter?) {
-    if (spaceFilter){
-      return this.http.get(`${this.baseUrl}/index?ohm:area__in=`+spaceFilter.join('|'));
-    } else {
-      return this.http.get(`${this.baseUrl}/index`);
+  getIndex(spaceFilter?: string[][] | null) {
+    if (spaceFilter) {
+      return this.http.get(`${this.baseUrl}/index?ohm:area__in=` + spaceFilter.join('|'));
     }
+    return this.http.get(`${this.baseUrl}/index`);
   }
 
-  getDatasets(filter?: any){
-    console.log(filter);
+  getDatasets(filter?: any) {
     return this.http.get(`${this.baseUrl}/datasets`, filter);
   }
 
-  getSources(filter?: any){
+  getSources(filter?: any) {
     return this.http.get(`${this.baseUrl}/sources`, filter);
   }
-  
-  getDataset(id){
-    return this.http.get(`${this.baseUrl}/datasets/`+id);
+
+  getDataset(id: string) {
+    return this.http.get(`${this.baseUrl}/datasets/` + id);
   }
 
-  getSource(id){
-    return this.http.get(`${this.baseUrl}/sources/`+id);
+  getSource(id: string) {
+    return this.http.get(`${this.baseUrl}/sources/` + id);
   }
 
-  addDataset(dataset: any){
-    
-  }
-
-
-  iconFor(t){
+  iconFor(t: string) {
     if (Object.keys(this.icons).indexOf(t) >= 0) {
       return this.icons[t];
-    } else {
-      return t;
     }
+    return t;
   }
 }

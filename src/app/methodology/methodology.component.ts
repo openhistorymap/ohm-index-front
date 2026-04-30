@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-methodology',
+  standalone: true,
   templateUrl: './methodology.component.html',
-  styleUrls: ['./methodology.component.scss']
+  styleUrls: ['./methodology.component.scss'],
 })
-export class MethodologyComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class MethodologyComponent {}

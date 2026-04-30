@@ -1,24 +1,22 @@
-import { Component, HostListener, Input, OnInit  } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { AreadetailComponent } from '../areadetail/areadetail.component';
 
 @Component({
   selector: 'ohm-areadisplay',
+  standalone: true,
+  imports: [CommonModule, OverlayModule, AreadetailComponent],
   templateUrl: './areadisplay.component.html',
-  styleUrls: ['./areadisplay.component.scss']
+  styleUrls: ['./areadisplay.component.scss'],
 })
-export class AreadisplayComponent implements OnInit {
-
+export class AreadisplayComponent implements OnDestroy {
   @Input() reference: any;
-  @Input() found: String[];
+  @Input() found: string[] = [];
   isOpen = false;
-  constructor(
-  ) { }
 
-  ngOnInit(): void {
-    
-  }
-
-  getPresent(r){
-    return this.found.indexOf(r)>=0?'yes':'no';
+  getPresent(r: string) {
+    return this.found.indexOf(r) >= 0 ? 'yes' : 'no';
   }
 
   @HostListener('mouseenter')
@@ -34,5 +32,4 @@ export class AreadisplayComponent implements OnInit {
   ngOnDestroy() {
     this.isOpen = false;
   }
-
 }

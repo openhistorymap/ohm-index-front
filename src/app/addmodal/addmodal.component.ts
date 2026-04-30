@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-addmodal',
+  standalone: true,
   templateUrl: './addmodal.component.html',
-  styleUrls: ['./addmodal.component.scss']
+  styleUrls: ['./addmodal.component.scss'],
 })
-export class AddmodalComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class AddmodalComponent {}

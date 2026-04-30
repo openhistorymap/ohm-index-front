@@ -1,9 +1,10 @@
-<div class="c" >
-    <div *ngFor="let r of reference" class="row" > 
-        <span class="icon" [ngClass]="getPresent(r)">
-          <i class="fas fa-fw fa-2x fa-{{iconFor(r)}} " title="{{r}}"></i> 
-        </span>
-        <span class="label">{{r}}</span>
-        
+<div class="c">
+  @for (r of reference; track r) {
+    <div class="row">
+      <span class="icon" [ngClass]="getPresent(r)">
+        <i class="fas fa-fw fa-2x fa-{{iconFor(r)}}" title="{{r}}"></i>
+      </span>
+      <span class="label">{{r}}</span>
     </div>
+  }
 </div>
