@@ -180,6 +180,7 @@
 .matrix {
   margin-top: var(--space-xl);
   overflow-x: auto;
+  overflow-y: visible;
 }
 
 .matrix-table {
@@ -205,35 +206,61 @@
 .matrix-topic-head {
   text-align: center;
   padding-bottom: var(--space-sm);
+  position: relative;
+  overflow: visible;
 }
 
 .matrix-topic-link {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 100%;
+  padding: var(--space-xs) 0;
   text-decoration: none;
-  color: var(--ohm-fg-2);
-  text-transform: capitalize;
-  font-size: var(--text-2xs);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
+  color: var(--ohm-fg);
   transition: color var(--duration-quick) var(--ease-out);
 }
 .matrix-topic-link i {
   font-size: 1.4rem;
-  color: var(--ohm-fg);
 }
-.matrix-topic-link:hover {
+.matrix-topic-link:hover,
+.matrix-topic-link:focus-visible {
   color: var(--ohm-accent);
 }
-.matrix-topic-link:hover i { color: var(--ohm-accent); }
 
-.matrix-topic-label {
-  font-size: 9px;
-  line-height: 1.2;
-  word-break: normal;
-  overflow-wrap: anywhere;
+.matrix-topic-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ohm-fg);
+  color: var(--ohm-bg);
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 8px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 20;
+  transition: opacity var(--duration-quick) var(--ease-out),
+              transform var(--duration-quick) var(--ease-out);
+}
+.matrix-topic-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--ohm-fg);
+}
+.matrix-topic-link:hover .matrix-topic-tooltip,
+.matrix-topic-link:focus-visible .matrix-topic-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .matrix-period-head,
@@ -286,5 +313,4 @@
 
 @media (max-width: 720px) {
   .indexpage { padding: var(--space-xl) var(--space-md); }
-  .matrix-topic-label { display: none; }
 }
