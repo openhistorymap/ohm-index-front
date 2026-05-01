@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { BehaviorSubject } from 'rxjs';
@@ -61,6 +62,7 @@ export class TopicTreeDatabase {
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     MatTreeModule,
     MatExpansionModule,
     MatChipsModule,

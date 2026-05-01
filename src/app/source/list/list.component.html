@@ -89,7 +89,7 @@
             </a>
           }
           @if (e.datasets) {
-            <a [href]="'/datasets;for=' + e.key" class="entry-link-datasets">
+            <a [routerLink]="['/datasets', { for: e.key }]" class="entry-link-datasets">
               {{ e.datasets }} dataset{{ e.datasets === 1 ? '' : 's' }} &rarr;
             </a>
           }

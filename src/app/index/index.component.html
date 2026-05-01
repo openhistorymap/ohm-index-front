@@ -80,7 +80,7 @@
             </th>
             @for (t of topics; track t) {
               <th class="matrix-topic-head" scope="col">
-                <a [href]="'/sources;ohm:topic=' + t" [title]="t" class="matrix-topic-link">
+                <a [routerLink]="['/sources', { 'ohm:topic': t }]" [title]="t" class="matrix-topic-link">
                   <i class="fas fa-{{ iconFor(t) }}" aria-hidden="true"></i>
                   <span class="matrix-topic-label">{{ topicLabel(t) }}</span>
                 </a>
@@ -99,7 +99,7 @@
               @for (t of topics; track t) {
                 <td class="matrix-cell">
                   <a
-                    [href]="'/sources;ohm:from_time=' + y[0] + ';ohm:to_time=' + y[1] + ';ohm:topic=' + t"
+                    [routerLink]="['/sources', { 'ohm:from_time': y[0], 'ohm:to_time': y[1], 'ohm:topic': t }]"
                     class="matrix-cell-link"
                     [attr.aria-label]="t + ' between ' + y[0] + ' and ' + y[1]">
                     <ohm-areadisplay [reference]="getReference(t)" [found]="getFound(y, t)"></ohm-areadisplay>
