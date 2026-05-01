@@ -137,9 +137,9 @@ export class OhmIndexService {
       obj[row.name] = row.values;
     }
     if (Array.isArray(obj.areas)) {
-      const dict: Record<string, string> = {};
+      const dict: Record<string, any> = {};
       for (const a of obj.areas) {
-        if (a?.id != null) dict[String(a.id)] = a.name ?? String(a.id);
+        if (a?.id != null) dict[String(a.id)] = a; // keep object so TreelabelPipe can read .name
       }
       obj.areas = dict;
     }
