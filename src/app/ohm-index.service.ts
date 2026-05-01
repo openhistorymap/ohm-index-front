@@ -145,12 +145,14 @@ export class OhmIndexService {
     }
     if (Array.isArray(obj.years)) {
       const seen = new Set<string>();
-      obj.years = obj.years.filter((y: any) => {
-        const k = JSON.stringify(y);
-        if (seen.has(k)) return false;
-        seen.add(k);
-        return true;
-      });
+      obj.years = obj.years
+        .filter((y: any) => {
+          const k = JSON.stringify(y);
+          if (seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        })
+        .sort((a: any, b: any) => (b?.[0] ?? 0) - (a?.[0] ?? 0));
     }
     return obj;
   }
