@@ -147,6 +147,10 @@ export class IndexComponent implements OnInit {
     return this.ohm.iconFor(t);
   }
 
+  topicLabel(t: string) {
+    return t.split(':').join(' ');
+  }
+
   getReference(t: string) {
     return Object.keys(this.indices.topics[t]);
   }

@@ -231,7 +231,9 @@
 
 .matrix-topic-label {
   font-size: 9px;
-  white-space: nowrap;
+  line-height: 1.2;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .matrix-period-head,
