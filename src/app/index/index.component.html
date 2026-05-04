@@ -80,9 +80,13 @@
             </th>
             @for (t of topics; track t) {
               <th class="matrix-topic-head" scope="col">
-                <a [routerLink]="['/sources', { 'ohm:topic': t }]" class="matrix-topic-link" [attr.aria-label]="topicLabel(t)">
+                <a
+                  [routerLink]="['/sources', { 'ohm:topic': t }]"
+                  class="matrix-topic-link"
+                  [matTooltip]="topicLabel(t)"
+                  matTooltipPosition="above"
+                  [attr.aria-label]="topicLabel(t)">
                   <i class="fas fa-{{ iconFor(t) }}" aria-hidden="true"></i>
-                  <span class="matrix-topic-tooltip" role="tooltip">{{ topicLabel(t) }}</span>
                 </a>
               </th>
             }

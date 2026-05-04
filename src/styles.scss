@@ -321,6 +321,15 @@ html {
   /* Tooltip */
   --mdc-plain-tooltip-container-color: var(--ohm-fg);
   --mdc-plain-tooltip-supporting-text-color: var(--ohm-bg);
+  --mdc-plain-tooltip-supporting-text-font: var(--font-ui);
+  --mdc-plain-tooltip-supporting-text-size: 11px;
+  --mdc-plain-tooltip-supporting-text-weight: 500;
+  --mdc-plain-tooltip-supporting-text-tracking: 0.06em;
+  --mdc-plain-tooltip-container-shape: 0;
+}
+
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  text-transform: uppercase;
 }
 
 /* Reduced motion: kill non-essential transitions */

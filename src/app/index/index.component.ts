@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { OhmIndexService } from '../ohm-index.service';
 import { TreelabelPipe } from '../shared/treelabel.pipe';
@@ -69,6 +70,7 @@ export class TopicTreeDatabase {
     MatCheckboxModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     TreelabelPipe,
     AreadisplayComponent,
   ],
