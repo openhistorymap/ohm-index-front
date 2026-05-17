@@ -178,11 +178,24 @@ export class OhmIndexService {
         title: s.title,
         itemType: s.type,
         url: s.url,
-        tags: s.tags || {},
+        tags: this.normalizeTags(s.tags),
         creators,
       },
       meta: { creatorSummary: s.creator_summary || '' },
     };
+  }
+
+  private normalizeTags(tags: any): Record<string, any> {
+    if (!tags) return {};
+    if (Array.isArray(tags)) {
+      const dict: Record<string, any> = {};
+      for (const t of tags) {
+        if (!t || !t.name) continue;
+        dict[t.name] = t.num_value != null ? t.num_value : t.str_value;
+      }
+      return dict;
+    }
+    return tags;
   }
 
   private adaptDataset(d: any, parent: any): any {
@@ -194,7 +207,7 @@ export class OhmIndexService {
         key: d.id,
         title: d.title,
         url: d.url,
-        tags: d.tags || {},
+        tags: this.normalizeTags(d.tags),
         parentItem:
           parent ?? {
             key: d.parent_research,
@@ -222,18 +235,19 @@ export class OhmIndexService {
         return tags?.['ohm:topic'] === topic;
       });
     }
-    const fromTime = read('ohm:from_time');
-    if (fromTime) {
+    const fromTimeRaw = read('ohm:from_time');
+    const toTimeRaw = read('ohm:to_time');
+    if (fromTimeRaw != null || toTimeRaw != null) {
+      const wantFrom = fromTimeRaw != null ? Number(fromTimeRaw) : Number.NEGATIVE_INFINITY;
+      const wantTo = toTimeRaw != null ? Number(toTimeRaw) : Number.POSITIVE_INFINITY;
       out = out.filter(x => {
         const tags = kind === 'dataset' ? x.data?.parentItem?.data?.tags : x.data?.tags;
-        return String(tags?.['ohm:from_time']) === fromTime;
-      });
-    }
-    const toTime = read('ohm:to_time');
-    if (toTime) {
-      out = out.filter(x => {
-        const tags = kind === 'dataset' ? x.data?.parentItem?.data?.tags : x.data?.tags;
-        return String(tags?.['ohm:to_time']) === toTime;
+        const sFromRaw = tags?.['ohm:from_time'];
+        const sToRaw = tags?.['ohm:to_time'];
+        if (sFromRaw == null && sToRaw == null) return false;
+        const sFrom = sFromRaw != null ? Number(sFromRaw) : Number.NEGATIVE_INFINITY;
+        const sTo = sToRaw != null ? Number(sToRaw) : Number.POSITIVE_INFINITY;
+        return sTo >= wantFrom && sFrom <= wantTo;
       });
     }
     const forSource = read('for');

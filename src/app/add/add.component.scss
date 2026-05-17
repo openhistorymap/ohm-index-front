@@ -70,3 +70,76 @@
   font-size: 1.4em;
   line-height: 1;
 }
+
+.contribute-tools-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--text-lg);
+  color: var(--ohm-fg-2);
+  margin: 0 0 var(--space-md);
+  letter-spacing: 0;
+}
+
+.contribute-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 1px 6px;
+  background: var(--ohm-bg-2);
+  border: var(--rule) solid var(--ohm-rule);
+  color: var(--ohm-fg);
+  white-space: nowrap;
+}
+
+.tool-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool {
+  padding: var(--space-md) 0;
+  border-top: var(--rule) solid var(--ohm-rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+.tool:last-child {
+  border-bottom: var(--rule) solid var(--ohm-rule);
+}
+
+.tool-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-md);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.tool-name a {
+  color: var(--ohm-fg);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklch, var(--ohm-fg) 30%, transparent);
+  text-underline-offset: 0.18em;
+}
+.tool-name a:hover {
+  color: var(--ohm-accent);
+  text-decoration-color: var(--ohm-accent);
+}
+
+.tool-blurb {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  color: var(--ohm-fg-2);
+  margin: 0;
+  max-width: var(--measure);
+}
+.tool-blurb code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 1px 5px;
+  background: var(--ohm-bg-2);
+  border: var(--rule) solid var(--ohm-rule);
+}
